@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        position: relative;
+        padding: 20px;
+      }
+      fieldset {
+        max-width: 850px;
+        border: 5px solid salmon;
+        border-radius: 10px;
+        box-shadow: -2px 12px 20px rgb(209, 209, 209);
+      }
+      body fieldset:nth-child(2) {
+        margin-top: 50px;
+      }
+      body fieldset:nth-child(1) legend,
+      body fieldset:nth-child(2) legend {
+        font-size: 38px;
+        font-weight: 600;
+        color: rgb(255, 255, 255);
+        position: relative;
+        padding-left: 2%;
+      }
+      body fieldset:nth-child(2) legend {
+        padding-left: 3%;
+      }
+      body fieldset:nth-child(1) legend::before,
+      body fieldset:nth-child(2) legend::before {
+        content: "";
+        position: absolute;
+        left: 50.5%;
+        bottom: -8px;
+        width: 540px;
+        height: 50px;
+        transform: skew(-12deg) translateX(-50%);
+        border-radius: 10px;
+        background: salmon;
+        z-index: -1;
+        border: 5px solid rgb(250, 107, 91);
+      }
+      body fieldset:nth-child(2) legend::before {
+        left: 52%;
+        width: 440px;
+      }
+      p {
+        font-size: 22px;
+        padding: 10px 0 20px 0;
+        margin: 0;
+      }
+      input {
+        margin: 0;
+        margin-right: 5px;
+      }
+      input[type="radio"] {
+        position: relative;
+        height: 22px;
+        width: 22px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+      }
+      input[type="radio"]::before {
+        content: "";
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 2px solid salmon;
+      }
+      input[type="radio"]:checked::after {
+        content: "";
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: salmon;
+        transform: translate(-50%, -50%);
+        visibility: visible;
+      }
+      button {
+        display: block;
+        margin: 10px 0 20px 0;
+        font-size: 18px;
+        padding: 10px 30px;
+        background-color: salmon;
+        color: white;
+        font-weight: 800;
+        border-radius: 50px;
+        cursor: pointer;
+        border: 3px solid rgba(121, 121, 121, 0.242);
+        letter-spacing: 0.5px;
+      }
+      .result-body {
+        margin-top: 50px;
+        border: 2px solid salmon;
+        max-width: 550px;
+        border-radius: 10px;
+      }
+      .result-body p {
+        font-size: 30px;
+        padding: 20px;
+      }
+      .result-body span {
+        font-weight: 800;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <fieldset>
+      <legend>For what do we need 'form' tag?</legend>
+      <div>
+        <p>
+          <input
+            type="radio"
+            name="form"
+            id="input1"
+            value="form-correct-answer"
+          />Элемент HTML "form" представляет (собой) раздел документа,
+          содержащий интерактивные элементы управления, которые позволяют
+          пользователю отправлять информацию на веб-сервер.
+        </p>
+        <p>
+          <input
+            type="radio"
+            name="form"
+            id="input2"
+            value="audio-incorrect-answer"
+          />HTML-элемент "form" используется для встраивания звукового контента
+          в документ. Он может содержать один или более источников аудио,
+          представленных с помощью атрибута src или элемента "source" – браузер
+          выберет один наиболее подходящий
+        </p>
+        <button id="firstButton">Next</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>For what do we need css?</legend>
+      <div>
+        <p>
+          <input
+            type="radio"
+            name="css"
+            value="css-correct-answer"
+            id="input3"
+          />Позволяет создавать великолепно выглядящие веб-страницы.
+        </p>
+        <p>
+          <input
+            type="radio"
+            name="css"
+            value="js-incorrect-answer"
+            id="input4"
+          />Позволяет вам создать динамически обновляемый контент, управляет
+          мультимедиа, анимирует изображения, впрочем, делает всё, что угодно.
+        </p>
+        <button id="secondButton">Finish</button>
+      </div>
+    </fieldset>
+
+    <div class="result-body">
+      <p>Result: <span id="result"></span> correct answers on 2 questions</p>
+    </div>
+
+    <script type="text/javascript">
+      let res = 0,
+        result = document.getElementById("result");
+
+      firstButton.onclick = function () {
+        if (input1.checked) {
+          res += 1;
+        }
+        if (result.innerText == 2) {
+          result.innerText = "";
+        }
+      };
+
+      secondButton.onclick = function () {
+        if (input3.checked) {
+          res += 1;
+        }
+        result.innerText = res;
+        res = 0
+
+        if (result.innerText == 1 || result.innerText == 2) {
+          let inputs = document.getElementsByTagName("input");
+          for (input of inputs) {
+            input.checked = false;
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
